@@ -10,8 +10,17 @@ export const useProjectsQuery = () => {
             excerpt
             featuredImage {
               node {
-                sourceUrl
+                filename
               }
+            }
+            website_link {
+              websiteLink
+            }
+            project_repo {
+              repoLink
+            }
+            locale {
+              locale
             }
           }
         }

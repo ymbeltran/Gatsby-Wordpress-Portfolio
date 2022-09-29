@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import Tilt from 'react-tilt';
 import { Container, Row, Col } from 'react-bootstrap';
-import PortfolioContext from '../../context/context';
 import Title from '../Title/Title';
 import ProjectImg from '../Image/ProjectImg';
 import { useProjectsQuery } from '../../hooks/useProjectsQuery';
@@ -10,8 +9,7 @@ import { useProjectsQuery } from '../../hooks/useProjectsQuery';
 var html2;
 
 const Projects = () => {
-  const { projects } = useContext(PortfolioContext);
-  const { edges } = useProjectsQuery();
+  const { edges:projects } = useProjectsQuery();
   
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -31,13 +29,18 @@ const Projects = () => {
       <Container>
         <div className="project-wrapper">
           <Title title="Projects" />
-          {edges.map((edge) => {
-            var info, info2, url, repo, img, id = null;
-            // const { title, info, info2, url, repo, img, id } = project;
-            const { title, excerpt, featuredImage } = edge.node;
-            // .edges.find((n) => n.node.relativePath.includes(filename));
-            console.log("featuredImage "+featuredImage[1]);
+          {projects.map((project) => {
+            var url, repo, img, id, lang = null;
+            const { title, excerpt, featuredImage, website_link, project_repo, locale } = project.node;
+            if(project_repo){
+              console.log("repoLink: "+title+" "+project_repo.repoLink);
+              repo = project_repo.repoLink;
+            }
+            locale?lang = locale.locale:null;
+            img=featuredImage.node.filename;
             html2=excerpt;
+            
+            if (lang == "en_US") {
             return (
               <Row key={id}>
                 <Col lg={4} sm={12}>
@@ -51,17 +54,11 @@ const Projects = () => {
                     <div className="project-wrapper__text">
                       <h3 className="project-wrapper__text-title">{title}</h3>
                       <div dangerouslySetInnerHTML={createMarkup()} />
-                        {/* <p>
-                          {info ||
-                            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi neque, ipsa animi maiores repellendu distinctioaperiam earum dolor voluptatum consequatur blanditiis inventore debitis fuga numquam voluptate architecto itaque molestiae.'}
-                        </p>
-                        <p className="mb-4">{info2 || ''}</p>
-                      </div> */}
                       <a
                         target="_blank"
                         rel="noopener noreferrer"
                         className="cta-btn cta-btn--hero"
-                        href={url || '#!'}
+                        href={website_link.websiteLink || '#!'}
                       >
                         See Live
                       </a>
@@ -116,7 +113,7 @@ const Projects = () => {
                   </Fade>
                 </Col>
               </Row>
-            );
+            );}
           })}
         </div>
       </Container>

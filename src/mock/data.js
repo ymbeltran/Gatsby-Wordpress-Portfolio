@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid';
 
-
 // HEAD DATA
 export const headData = {
   title: '', // e.g: 'Name | Developer'
@@ -13,7 +12,7 @@ export const headData = {
 export const heroData = {
   title: '', 
   name: '',
-  subtitle: '',
+  subtitle: 'I\'m a frontend developer',
   cta: '', 
 };
 
@@ -61,7 +60,7 @@ export const projectsData = [
 export const contactData = {
   cta: '',
   btn: '',
-  email: '',
+  email: 'me@yesse.co',
 };
 
 // FOOTER DATA
@@ -92,5 +91,5 @@ export const footerData = {
 
 // Github start/fork buttons
 export const githubButtons = {
-  isEnabled: true, // set to false to disable the GitHub stars/fork buttons
+  isEnabled: false, // set to false to disable the GitHub stars/fork buttons
 };

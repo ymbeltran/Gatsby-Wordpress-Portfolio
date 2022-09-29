@@ -1,7 +1,7 @@
 import { useStaticQuery, graphql } from "gatsby"
 
 export const useHeroQuery = () => {
-  const data = useStaticQuery(graphql`
+  const dataHero = useStaticQuery(graphql`
     query HeroQuery {
       wp {
         generalSettings {
@@ -11,5 +11,5 @@ export const useHeroQuery = () => {
     }
   `)
 
-  return data;
+  return dataHero;
 }

@@ -1,28 +1,23 @@
 import { useStaticQuery, graphql } from "gatsby"
 
 export const useAboutQuery = () => {
-  const data = useStaticQuery(graphql`
+  const dataAbout = useStaticQuery(graphql`
     query {
       wpPage(title: {eq: "About Me"}) {
         title
         uri
-        content
+        excerpt
         featuredImage {
           node {
-            localFile {
-              url
-              relativePath
-              childImageSharp {
-                fixed(width: 350) {
-                  srcWebp
-                }
-              }
-            }
+            filename
           }
+        }
+        resumeLink {
+          resume
         }
       }
     }
   `)
 
-  return data
+  return dataAbout
 }
