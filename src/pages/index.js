@@ -1,23 +1,29 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+
 import App from '../components/App';
 import { headData } from '../mock/data';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../style/main.scss';
+import { Helmet } from 'react-helmet';
+import { useHeadDataQuery } from '../hooks/useHeadDataQuery';
 
-const portfolio = () => {
-  const { title, lang, description } = headData;
-
+const Portfolio = () => {
+  const { generalSettings } = useHeadDataQuery();
+  const { title, language:lang, description } = generalSettings;
+  
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-        <title>{title || 'Gatsby Simplefolio'}</title>
-        <html lang={lang || 'en'} />
-        <meta name="description" content={description || 'Gatsby Simplefolio'} />
-      </Helmet>
+      <Helmet title = {title}
+          htmlAttributes={{ lang: "en" }}
+          meta={[
+        {
+          name: `description`,
+          content: description,
+        } 
+      ]}
+   />
       <App />
     </>
   );
 };
-export default portfolio;
+export default Portfolio;

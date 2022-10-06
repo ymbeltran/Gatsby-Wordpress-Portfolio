@@ -11,7 +11,8 @@
 
   .project-wrapper {
     margin-bottom: 15rem;
-
+    display: flex;
+    flex-direction: column;
     @include respond(phone) {
       margin-bottom: 0rem;
     }
@@ -23,6 +24,12 @@
         margin-bottom: 4rem;
       }
     }
+
+    #practicas_educativas_emergentes{order:2}
+    #todo_list{order:1}
+    #menta_co{order:3}
+    #mundo_chance{order:4}
+    #entrelazados_co{order:5}
 
     &__text {
       text-align: left;

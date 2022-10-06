@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 export const useProjectsQuery = () => {
   const projects = useStaticQuery(graphql`
     query ProjectsQuery {
-      allWpPost {
+      allWpPost (sort: {fields: date, order: DESC}) {
         edges {
           node {
             title
@@ -22,12 +22,13 @@ export const useProjectsQuery = () => {
             locale {
               locale
             }
+            id
           }
         }
       }  
     }
   `);
-  /* var output, property, propert, output1, proper, output2;
+/*   var output, property, propert, output1, proper, output2;
   for (property in projects.allWpPost.edges) {
       output += property + ': ' + projects.allWpPost.edges[property] + '; ';
       for (propert in projects.allWpPost.edges[property]) {
@@ -37,8 +38,6 @@ export const useProjectsQuery = () => {
         }
         console.log("projects.allWpPost.edges[property][propert][proper] "+output2);
       }
-      // console.log("projects.allWpPost.edges[property][propert] "+output1);
   } */
-  // console.log("projects.allWpPost.edges[property] "+output);
   return projects.allWpPost;
 }

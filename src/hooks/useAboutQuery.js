@@ -12,9 +12,6 @@ export const useAboutQuery = () => {
             filename
           }
         }
-        resumeLink {
-          resume
-        }
       }
     }
   `)

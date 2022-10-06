@@ -7,7 +7,7 @@ const ProjectImg = ({ filename, alt }) => (
   <StaticQuery
     query={graphql`
       query {
-        images: allFile {
+        images: allFile (limit: 20) {
           edges {
             node {
               relativePath
@@ -24,7 +24,7 @@ const ProjectImg = ({ filename, alt }) => (
     `}
     render={(data) => {
       const image = data.images.edges.find((n) => n.node.relativePath.includes(filename));
-
+      
       if (!image) return null;
 
       const imageFluid = image.node.childImageSharp.fluid;

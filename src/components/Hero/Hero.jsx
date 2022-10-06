@@ -4,6 +4,8 @@ import Fade from 'react-reveal/Fade';
 import { Link } from 'react-scroll';
 import PortfolioContext from '../../context/context';
 import { useHeroQuery } from '../../hooks/useHeroQuery';
+import Canvas from '../Canvas/Canvas';
+import Menu from '../Menu/Menu';
 
 const Header = () => {
   const { hero } = useContext(PortfolioContext);
@@ -28,7 +30,8 @@ const Header = () => {
 
   return (
     <section id="hero" className="jumbotron">
-      <Container>
+      <Menu />
+      <Container className="hero-container">
         <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={500} distance="30px">
           <h1 className="hero-title">
             {title || 'Hi, my name is'}{' '}
@@ -47,6 +50,7 @@ const Header = () => {
           </p>
         </Fade>
       </Container>
+      <Canvas />
     </section>
   );
 };

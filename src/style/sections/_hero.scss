@@ -1,6 +1,6 @@
 #hero {
-  min-height: 100vh;
-  height: 100vh;
+  min-height: 60vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   border-bottom: 0px;
@@ -13,7 +13,9 @@
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: -1;
+  z-index: 2;
+  position: relative;
+  overflow-x: hidden;
 
   // If you want to set a background image on the hero section, uncomment these with yout custom image
 
@@ -28,7 +30,7 @@
   .hero-title {
     font-size: 5.6rem;
     font-weight: 700;
-    margin-bottom: 3.2rem;
+    margin: 17rem 0 4rem 0;
     text-align: left;
 
     @include respond(tab-land) {
@@ -61,5 +63,18 @@
         font-size: 2rem;
       }
     }
+  }
+  #hero-wave{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+
+    @include respond(phone) {
+      top: unset;
+      left: 0;
+    }
+  }
+  .hero-container{
+    height: 100%;
   }
 }

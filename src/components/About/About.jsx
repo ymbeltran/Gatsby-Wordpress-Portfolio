@@ -14,8 +14,8 @@ const About = () => {
   const { wpPage : aboutPage } = useAboutQuery();
   la = aboutPage.excerpt;
   const img = aboutPage.featuredImage.node.filename;
-  const cv = aboutPage.resumeLink.resume?aboutPage.resumeLink.resume:"http://#";
-  console.log("cv: "+cv);
+  
+  /* const cv = aboutPage.resumeLink.resume?aboutPage.resumeLink.resume:"http://#";*/
   
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -48,6 +48,7 @@ const About = () => {
                 {resume && (
                   <span className="d-flex mt-3">
                     <a
+                      id="resume"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="cta-btn cta-btn--resume"

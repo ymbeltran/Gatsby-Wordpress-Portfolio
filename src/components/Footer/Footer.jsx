@@ -39,10 +39,11 @@ const Footer = () => {
         </div>
         <hr />
         <p className="footer__text">
-          © {new Date().getFullYear()} - Based on {' '}
+          © {new Date().getFullYear()} - Customized from {' '}
           <a href="https://github.com/cobidev/gatsby-simplefolio" target="_blank" rel="noopener noreferrer">
-          Gatsby Simplefolio Template
+          Gatsby Simplefolio Template. 
           </a>
+          <br/>Developed using Wordpress as a headless CMS with GraphQl.
         </p>
 
         {isEnabled && <GithubButtons />}

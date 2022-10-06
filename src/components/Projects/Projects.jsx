@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Fade from 'react-reveal/Fade';
 import Tilt from 'react-tilt';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -30,19 +30,18 @@ const Projects = () => {
         <div className="project-wrapper">
           <Title title="Projects" />
           {projects.map((project) => {
-            var url, repo, img, id, lang = null;
-            const { title, excerpt, featuredImage, website_link, project_repo, locale } = project.node;
-            if(project_repo){
-              console.log("repoLink: "+title+" "+project_repo.repoLink);
-              repo = project_repo.repoLink;
-            }
-            locale?lang = locale.locale:null;
-            img=featuredImage.node.filename;
+            var url, repo, img, lang = null;
+            const { title, excerpt, featuredImage, website_link, project_repo, locale, id } = project.node;
+            lang = locale? locale.locale : null;
+            lang = id==="cG9zdDo1MDg="? "en_US" : lang;
+            img=encodeURIComponent(featuredImage.node.filename);
             html2=excerpt;
+            var id_p = ((title.replaceAll(' ', '_')).toLowerCase()).replaceAll('.', '_');
+            repo = project_repo!== null? project_repo.repoLink: '';
             
-            if (lang == "en_US") {
+            if (lang === "en_US") {
             return (
-              <Row key={id}>
+              <Row id={id_p} key={id}>
                 <Col lg={4} sm={12}>
                   <Fade
                     left={isDesktop}
