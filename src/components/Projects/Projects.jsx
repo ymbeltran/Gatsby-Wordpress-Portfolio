@@ -6,7 +6,9 @@ import Title from '../Title/Title';
 import ProjectImg from '../Image/ProjectImg';
 import { useProjectsQuery } from '../../hooks/useProjectsQuery';
 
-var html2;
+const postCustomLangs = {
+  "cG9zdDo1MDg=": "en_US"
+}
 
 const Projects = () => {
   const { edges:projects } = useProjectsQuery();
@@ -30,96 +32,98 @@ const Projects = () => {
         <div className="project-wrapper">
           <Title title="Projects" />
           {projects.map((project) => {
-            var url, repo, img, lang = null;
             const { title, excerpt, featuredImage, website_link, project_repo, locale, id } = project.node;
-            lang = locale? locale.locale : null;
-            lang = id==="cG9zdDo1MDg="? "en_US" : lang;
-            img=encodeURIComponent(featuredImage.node.filename);
-            html2=excerpt;
-            var id_p = ((title.replaceAll(' ', '_')).toLowerCase()).replaceAll('.', '_');
-            repo = project_repo!== null? project_repo.repoLink: '';
+            
+            const url = website_link.websiteLink;
+
+            let lang = locale? locale.locale : null;
+            lang = postCustomLangs[id] || lang;
+
+            const img = encodeURIComponent(featuredImage.node.filename);
+            const id_p = title.replaceAll(' ', '_').toLowerCase().replaceAll('.', '_');
+            const repo = project_repo!== null? project_repo.repoLink: '';
             
             if (lang === "en_US") {
-            return (
-              <Row id={id_p} key={id}>
-                <Col lg={4} sm={12}>
-                  <Fade
-                    left={isDesktop}
-                    bottom={isMobile}
-                    duration={1000}
-                    delay={500}
-                    distance="30px"
-                  >
-                    <div className="project-wrapper__text">
-                      <h3 className="project-wrapper__text-title">{title}</h3>
-                      <div dangerouslySetInnerHTML={createMarkup()} />
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cta-btn cta-btn--hero"
-                        href={website_link.websiteLink || '#!'}
-                      >
-                        See Live
-                      </a>
-
-                      {repo && (
+              return (
+                <Row id={id_p} key={id}>
+                  <Col lg={4} sm={12}>
+                    <Fade
+                      left={isDesktop}
+                      bottom={isMobile}
+                      duration={1000}
+                      delay={500}
+                      distance="30px"
+                    >
+                      <div className="project-wrapper__text">
+                        <h3 className="project-wrapper__text-title">{title}</h3>
+                        <div dangerouslySetInnerHTML={{__html: excerpt}} />
                         <a
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="cta-btn text-color-main"
-                          href={repo}
+                          className="cta-btn cta-btn--hero"
+                          href={url || '#!'}
                         >
-                          Source Code
+                          See Live
                         </a>
-                      )}
-                    </div>
-                  </Fade>
-                </Col>
-                <Col lg={8} sm={12}>
-                  <Fade
-                    right={isDesktop}
-                    bottom={isMobile}
-                    duration={1000}
-                    delay={1000}
-                    distance="30px"
-                  >
-                    <div className="project-wrapper__image">
-                      <a
-                        href={url || '#!'}
-                        target="_blank"
-                        aria-label="Project Link"
-                        rel="noopener noreferrer"
-                      >
-                        <Tilt
-                          options={{
-                            reverse: false,
-                            max: 8,
-                            perspective: 1000,
-                            scale: 1,
-                            speed: 300,
-                            transition: true,
-                            axis: null,
-                            reset: true,
-                            easing: 'cubic-bezier(.03,.98,.52,.99)',
-                          }}
+
+                        {repo && (
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cta-btn text-color-main"
+                            href={repo}
+                          >
+                            Source Code
+                          </a>
+                        )}
+                      </div>
+                    </Fade>
+                  </Col>
+                  <Col lg={8} sm={12}>
+                    <Fade
+                      right={isDesktop}
+                      bottom={isMobile}
+                      duration={1000}
+                      delay={1000}
+                      distance="30px"
+                    >
+                      <div className="project-wrapper__image">
+                        <a
+                          href={url || '#!'}
+                          target="_blank"
+                          aria-label="Project Link"
+                          rel="noopener noreferrer"
                         >
-                          <div data-tilt className="thumbnail rounded">
-                            <ProjectImg alt={title} filename={img} />
-                          </div>
-                        </Tilt>
-                      </a>
-                    </div>
-                  </Fade>
-                </Col>
-              </Row>
-            );}
+                          <Tilt
+                            options={{
+                              reverse: false,
+                              max: 8,
+                              perspective: 1000,
+                              scale: 1,
+                              speed: 300,
+                              transition: true,
+                              axis: null,
+                              reset: true,
+                              easing: 'cubic-bezier(.03,.98,.52,.99)',
+                            }}
+                          >
+                            <div data-tilt className="thumbnail rounded">
+                              <ProjectImg alt={title} filename={img} />
+                            </div>
+                          </Tilt>
+                        </a>
+                      </div>
+                    </Fade>
+                  </Col>
+                </Row>
+              );
+            }
+            else return <></>
           })}
         </div>
       </Container>
     </section>
   );
 };
-function createMarkup() {
-  return {__html: html2};
-}
+
 export default Projects;

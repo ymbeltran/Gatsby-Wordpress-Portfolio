@@ -3,11 +3,34 @@ import { StaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 
+/*
+{
+  images: allFile(filter: {base: {eq:"2019-03-03_1641.png"}}) {
+    edges {
+      node {
+        relativePath
+        name
+        base
+        absolutePath
+        childImageSharp {
+          fluid(maxWidth: 1366) {
+            ...GatsbyImageSharpFluid
+            src
+          }
+          original {
+            src
+          }
+        }
+      }
+    }
+  }
+}*/
+
 const ProjectImg = ({ filename, alt }) => (
   <StaticQuery
     query={graphql`
       query {
-        images: allFile (limit: 20) {
+        images: allFile (limit: 300) {
           edges {
             node {
               relativePath

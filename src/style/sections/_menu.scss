@@ -26,10 +26,6 @@
   .light ul#nav li a{
     color: $primary-color;
   }
-  /*  .opaque li.current a { 
-      color: $about-color; 
-      background-color: #fff;
-    } */
   
   /* hide toggle button */
   #nav-wrap > a.mobile-btn { display: none; }
@@ -47,14 +43,6 @@
     height: 48px;
     display: inline-block;
   }
-  /* .softhide{
-    animation: fadeOut 2s;
-    display: none;
-  }
-  @keyframes fadeOut {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
-  } */
   .visible {
     visibility: visible;
     opacity: 1;
