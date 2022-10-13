@@ -1,21 +1,16 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Fade from 'react-reveal/Fade';
 import { Container, Row, Col } from 'react-bootstrap';
 import Title from '../Title/Title';
 import AboutImg from '../Image/AboutImg';
-import PortfolioContext from '../../context/context';
 import { useAboutQuery } from '../../hooks/useAboutQuery';
 
-var la;
-
 const About = () => {
-  const { about } = useContext(PortfolioContext);
-  const { resume } = about;
-  const { wpPage : aboutPage } = useAboutQuery();
-  la = aboutPage.excerpt;
-  const img = aboutPage.featuredImage.node.filename;
+  const { wpPage : aboutPage, wp } = useAboutQuery();
+  const resumeSlug = aboutPage.resumeLink.resume;
+  const resume = wp.allSettings.generalSettingsUrl.concat(resumeSlug);
   
-  /* const cv = aboutPage.resumeLink.resume?aboutPage.resumeLink.resume:"http://#";*/
+  const img = aboutPage.featuredImage.node.filename;
   
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -43,7 +38,7 @@ const About = () => {
           </Col>
           <Col md={6} sm={12}>
             <Fade left={isDesktop} bottom={isMobile} duration={1000} delay={1000} distance="30px">
-              <article className='about-wrapper__info-text' dangerouslySetInnerHTML={createMarkup()} />
+              <article className='about-wrapper__info-text' dangerouslySetInnerHTML={{__html: aboutPage.excerpt}} />
               <div className="about-wrapper__info">
                 {resume && (
                   <span className="d-flex mt-3">
@@ -67,7 +62,4 @@ const About = () => {
   );
 };
 
-function createMarkup() {
-  return {__html: la};
-}
 export default About;

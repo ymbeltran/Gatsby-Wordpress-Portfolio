@@ -43,7 +43,7 @@ const Projects = () => {
             const id_p = title.replaceAll(' ', '_').toLowerCase().replaceAll('.', '_');
             const repo = project_repo!== null? project_repo.repoLink: '';
             
-            if (lang === "en_US") {
+            if (lang === "en_US" && excerpt !== "") {
               return (
                 <Row id={id_p} key={id}>
                   <Col lg={4} sm={12}>

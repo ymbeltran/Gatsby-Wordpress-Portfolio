@@ -12,6 +12,14 @@ export const useAboutQuery = () => {
             filename
           }
         }
+        resumeLink {
+          resume
+        }
+      }
+      wp {
+        allSettings {
+          generalSettingsUrl
+        }
       }
     }
   `)
