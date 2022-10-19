@@ -37,6 +37,12 @@ const Menu = () => {
   }, []);
     return (
         <nav id="nav-wrap" className='light' >
+          <a className="mobile-btn" href="#nav-wrap" title="Show navigation">
+            Show navigation
+          </a>
+          <a className="mobile-btn" href="#home" title="Hide navigation">
+            Hide navigation
+          </a>
           <ul id="nav" className="nav">
           <li className={currentMenu==="home"&&"current"}>
           <Link id="home" to="hero" smooth duration={1000}  onClick={handleClick}>
